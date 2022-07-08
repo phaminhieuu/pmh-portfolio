@@ -9,12 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.14.3",
+    "@react-three/fiber": "^8.0.27",
+    "framer-motion": "^6.4.2",
+    "lerp": "^1.0.3",
     "next": "12.2.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-intersection-observer": "^9.3.5",
+    "three": "^0.141.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.7",
     "eslint": "8.18.0",
-    "eslint-config-next": "12.2.0"
+    "eslint-config-next": "12.2.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.4"
   }
 }
