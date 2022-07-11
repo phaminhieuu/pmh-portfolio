@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import Model from "../Model";
 import Navbar from "../navbar";
 
 export default function Main({ children, router }) {
@@ -11,6 +12,9 @@ export default function Main({ children, router }) {
       </Head>
 
       <Navbar path={router.asPath} />
+      <div>
+        <Model />
+      </div>
       {children}
     </>
   );

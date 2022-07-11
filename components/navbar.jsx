@@ -3,12 +3,24 @@ import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import Logo from "./logo";
 import NextLink from "next/link";
 import { useInView } from "react-intersection-observer";
+import { useRouter } from "next/router";
 
 const LinkItem = ({ href, path, children }) => {
   const active = path === href;
+  // const active = true;
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      console.log(window.location.href);
+    }
+  }, []);
+
   return (
-    <NextLink href={href}>
-      <div className="relative text-xl">
+    <NextLink href={href} replace>
+      <div
+        className="relative text-xl"
+        // onClick={() => window.history.pushState(null, "", href)}
+      >
         <div className={`custom-link ${active && "active-link"}`}>
           <a className="cursor-pointer">{children}</a>
         </div>
