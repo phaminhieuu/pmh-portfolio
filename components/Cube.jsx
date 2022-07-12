@@ -9,6 +9,9 @@ import {
 import perlin3 from "../utils/perlin";
 import * as THREE from "three";
 import lerp from "lerp";
+import vertexShader from "../shaders/shader-patterns/vertex.glsl";
+import fragmentShader from "../shaders/shader-patterns/fragment.glsl";
+import { clamp } from "../utils/function";
 
 const p3 = (time, threshold) => (a, b, c) =>
   perlin3(
@@ -90,6 +93,7 @@ export default function Cubes({ mouse, onHold }) {
   });
 
   useFrame(({ clock }) => {
+    const a = clock.getElapsedTime();
     camera.position.lerp(vec3.set(0, 0, 8), 0.1);
 
     let offset = onHold ? 2 : 1;
@@ -100,15 +104,21 @@ export default function Cubes({ mouse, onHold }) {
           const sign = (y > 0 ? -1 : 1) * (x > 0 ? -1 : 1);
           const s = positions[id];
 
-          let xOffset = lerp(x, x * offset, 0.05);
-          let yOffset = lerp(y, y * offset, 0.05);
-          let zOffset = lerp(z, z * offset, 0.05);
+          let xOffset = lerp(objects[id].position.x, x * offset, 0.1);
+          let yOffset = lerp(objects[id].position.y, y * offset, 0.1);
+          let zOffset = lerp(objects[id].position.z, z * offset, 0.1);
 
-          objects[id].position.set(x, y, z);
+          if (onHold) {
+            objects[id].position.set(xOffset, yOffset, zOffset);
+          } else {
+            objects[id].position.set(
+              lerp(objects[id].position.x, x, 0.1),
+              lerp(objects[id].position.y, y, 0.1),
+              lerp(objects[id].position.z, z, 0.1),
+              
+            );
+          }
 
-          // objects[id].position.x = lerp(x, x * 2, 0.1);
-          // objects[id].position.y = lerp(y, y * 2, 0.1);
-          // objects[id].position.z = lerp(z, z * 2, 0.1);
           objects[id].scale.lerp(vec.set(s, s, s), 0.1);
           objects[id].rotation.x = lerp(
             objects[id].rotation.x,
@@ -130,8 +140,6 @@ export default function Cubes({ mouse, onHold }) {
         }
       }
     }
-
-    const a = clock.getElapsedTime();
 
     instance.current.rotation.x = 0.2 * a;
     instance.current.rotation.y = 0.2 * a;
@@ -165,7 +173,11 @@ export default function Cubes({ mouse, onHold }) {
       args={[null, null, TOT]}
     >
       <boxBufferGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial morphTargets metalness={0.5} roughness={2} />
+      <meshNormalMaterial metalness={0.5} roughness={2} />
+      {/* <shaderMaterial
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+      /> */}
     </instancedMesh>
   );
 }
