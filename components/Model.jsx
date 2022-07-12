@@ -51,6 +51,7 @@ export default function Model() {
   return (
     <div className="w-full h-screen">
       <Canvas
+        style={{ cursor: "pointer" }}
         dpr={[1, 2]}
         linear
         camera={{
@@ -61,9 +62,12 @@ export default function Model() {
         }}
         shadows
         onMouseMove={onMouseMove}
+        // onTouchMove={onMouseMove}
         onMouseUp={() => setOnHold(false)}
         onMouseDown={() => setOnHold(true)}
         onMouseLeave={() => setOnHold(false)}
+        onTouchStart={() => setOnHold(true)}
+        onTouchEnd={() => setOnHold(false)}
       >
         <Suspense fallback={null}>
           <Lights />
