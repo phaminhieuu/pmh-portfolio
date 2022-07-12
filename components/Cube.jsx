@@ -1,10 +1,11 @@
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import {
   useCallback,
   useEffect,
   useRef,
   useState,
   useLayoutEffect,
+  useMemo,
 } from "react";
 import perlin3 from "../utils/perlin";
 import * as THREE from "three";
@@ -12,6 +13,8 @@ import lerp from "lerp";
 import vertexShader from "../shaders/shader-patterns/vertex.glsl";
 import fragmentShader from "../shaders/shader-patterns/fragment.glsl";
 import { clamp } from "../utils/function";
+import niceColors from "nice-color-palettes";
+import { isMobile } from "react-device-detect";
 
 const p3 = (time, threshold) => (a, b, c) =>
   perlin3(
@@ -24,14 +27,16 @@ const TOT = NUM * NUM * NUM;
 
 export default function Cubes({ mouse, onHold }) {
   const instance = useRef();
-  const { clock, size, viewport, camera } = useThree();
+  const influence = useRef(0);
+  console.log(isMobile);
+
+  const { clock, camera } = useThree();
   const [objects] = useState(() =>
     [...new Array(TOT)].map(() => new THREE.Object3D())
   );
   const [vec] = useState(() => new THREE.Vector3());
   const vec3 = new THREE.Vector3();
-  const sphereFormation = [];
-  const aspect = size.width / viewport.width;
+  const color = new THREE.Color();
 
   const update = useCallback((count) => {
     const positions = [];
@@ -51,50 +56,16 @@ export default function Cubes({ mouse, onHold }) {
     return [count, positions];
   }, []);
   const [[count, positions], set] = useState(() => update(0));
+  // console.log(count);
 
   useEffect(() => {
-    const id = setInterval(() => set(([count]) => update(count + 1)), 2500);
+    const id = setInterval(() => set(([count]) => update(count + 1)), 3000);
     return () => clearInterval(id);
   }, [update]);
 
-  useEffect(() => {
-    if (!instance.current) return;
-    var geometry = instance.current.geometry;
-
-    // create an empty array to  hold targets for the attribute we want to morph
-    // morphing positions and normals is supported
-    // geometry.morphAttributes = 0;
-
-    // console.log(geometry.morphAttributes);
-
-    // the original positions of the cube's vertices
-    //   const positionAttribute = geometry.attributes.position;
-    //   // for the second morph target, we'll twist the cubes vertices
-
-    //   for (let i = 0; i < positionAttribute.count; i++) {
-    //     const x = positionAttribute.getX(i);
-    //     const y = positionAttribute.getY(i);
-    //     const z = positionAttribute.getZ(i);
-
-    //     sphereFormation.push(
-    //       x * Math.sqrt(1 - (y * y) / 2 - (z * z) / 2 + (y * y * z * z) / 3),
-    //       y * Math.sqrt(1 - (z * z) / 2 - (x * x) / 2 + (z * z * x * x) / 3),
-    //       z * Math.sqrt(1 - (x * x) / 2 - (y * y) / 2 + (x * x * y * y) / 3)
-    //     );
-
-    //     // stretch along the x-axis so we can see the twist better
-    //   }
-    //   geometry.morphAttributes.position[0] = new THREE.Float32BufferAttribute(
-    //     sphereFormation,
-    //     3
-    //   );
-
-    //   instance.current.updateMorphTargets();
-  });
-
   useFrame(({ clock }) => {
     const a = clock.getElapsedTime();
-    camera.position.lerp(vec3.set(0, 0, 8), 0.1);
+    camera.position.lerp(vec3.set(0, 0, isMobile ? 15 : 10), 0.1);
 
     let offset = onHold ? 2 : 1;
     let id = 0;
@@ -104,18 +75,17 @@ export default function Cubes({ mouse, onHold }) {
           const sign = (y > 0 ? -1 : 1) * (x > 0 ? -1 : 1);
           const s = positions[id];
 
-          let xOffset = lerp(objects[id].position.x, x * offset, 0.1);
-          let yOffset = lerp(objects[id].position.y, y * offset, 0.1);
-          let zOffset = lerp(objects[id].position.z, z * offset, 0.1);
+          let xOffset = lerp(objects[id].position.x, x * offset, 0.2);
+          let yOffset = lerp(objects[id].position.y, y * offset, 0.2);
+          let zOffset = lerp(objects[id].position.z, z * offset, 0.2);
 
           if (onHold) {
             objects[id].position.set(xOffset, yOffset, zOffset);
           } else {
             objects[id].position.set(
-              lerp(objects[id].position.x, x, 0.1),
-              lerp(objects[id].position.y, y, 0.1),
-              lerp(objects[id].position.z, z, 0.1),
-              
+              lerp(objects[id].position.x, x, 0.2),
+              lerp(objects[id].position.y, y, 0.2),
+              lerp(objects[id].position.z, z, 0.2)
             );
           }
 
@@ -137,18 +107,16 @@ export default function Cubes({ mouse, onHold }) {
           );
           objects[id].updateMatrix();
           instance.current.setMatrixAt(id, objects[id++].matrix);
+          // instance.current.setColorAt(
+          //   id,
+          //   color.setHex(0xffffff * Math.random())
+          // );
         }
       }
     }
 
     instance.current.rotation.x = 0.2 * a;
     instance.current.rotation.y = 0.2 * a;
-
-    // if (onHold) {
-    //   instance.current.position.x += 2;
-    // } else {
-    //   instance.current.position.x = 0;
-    // }
 
     instance.current.rotation.x = lerp(
       instance.current.rotation.x,
@@ -161,23 +129,87 @@ export default function Cubes({ mouse, onHold }) {
       0.3
     );
 
+    influence.current = Math.sin(a);
+    instance.current.morphTargetInfluences[0] = influence.current;
     instance.current.instanceMatrix.needsUpdate = true;
   });
 
+  // useEffect(() => {
+  //   if (!instance.current) return;
+  //   const sphereFormation = [];
+  //   const geometry = instance.current.geometry;
+  //   geometry.morphAttributes.position = [];
+
+  //   // create an empty array to  hold targets for the attribute we want to morph
+  //   // morphing positions and normals is supported
+  //   geometry.morphAttributes.position = [];
+
+  //   // the original positions of the cube's vertices
+  //   const positionAttribute = geometry.attributes.position;
+  //   // for the second morph target, we'll twist the cubes vertices
+
+  //   for (let i = 0; i < positionAttribute.count; i++) {
+  //     const x = positionAttribute.getX(i);
+  //     const y = positionAttribute.getY(i);
+  //     const z = positionAttribute.getZ(i);
+
+  //     sphereFormation.push(
+  //       x * Math.sqrt(1 - (y * y) / 2 - (z * z) / 2 + (y * y * z * z) / 3),
+  //       y * Math.sqrt(1 - (z * z) / 2 - (x * x) / 2 + (z * z * x * x) / 3),
+  //       z * Math.sqrt(1 - (x * x) / 2 - (y * y) / 2 + (x * x * y * y) / 3)
+  //     );
+
+  //     // stretch along the x-axis so we can see the twist better
+  //   }
+  //   geometry.morphAttributes.position[0] = new THREE.Float32BufferAttribute(
+  //     sphereFormation,
+  //     3
+  //   );
+
+  //   instance.current.updateMorphTargets();
+  // });
+
+  const map = useLoader(THREE.TextureLoader, "/images/carbon_normal.jpg");
+
+  const colors = useMemo(() => {
+    const array = new Float32Array(TOT * 3);
+    const color = new THREE.Color();
+    for (let i = 0; i < TOT; i++)
+      color
+        .set(niceColors[17][Math.floor(Math.random() * 5)])
+        .convertSRGBToLinear()
+        .toArray(array, i * 3);
+    return array;
+  }, []);
+
   return (
     <instancedMesh
-      position={[0.5, 0.5, 0.5]}
+      // position={[0.5, 0.5, 0.5]}
       receiveShadow
       castShadow
       ref={instance}
       args={[null, null, TOT]}
+      morphTargetInfluences={[1]}
     >
+      {/* <sphereBufferGeometry args={[0.5, 32, 32]} /> */}
       <boxBufferGeometry args={[1, 1, 1]} />
-      <meshNormalMaterial metalness={0.5} roughness={2} />
+      {/* <meshNormalMaterial morphTargets metalness={0.5} roughness={2} /> */}
       {/* <shaderMaterial
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
       /> */}
+      <meshPhongMaterial
+        morphTargets
+        attach="material"
+        vertexColors={THREE.VertexColors}
+        normalMap={map}
+        normalScale={[1, 1]}
+        normalMap-wrapS={THREE.RepeatWrapping}
+        normalMap-wrapT={THREE.RepeatWrapping}
+        normalMap-repeat={[10, 10]}
+        metalness={2}
+        roughness={3}
+      />
     </instancedMesh>
   );
 }

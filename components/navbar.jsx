@@ -7,13 +7,6 @@ import { useRouter } from "next/router";
 
 const LinkItem = ({ href, path, children }) => {
   const active = path === href;
-  // const active = true;
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      console.log(window.location.href);
-    }
-  }, []);
 
   return (
     <NextLink href={href} replace>

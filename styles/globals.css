@@ -36,7 +36,12 @@ html:focus-within {
 html,
 body {
   height: 100%;
-  background: rgb(10, 10, 10);
+  /* background: rgb(10, 10, 10); */
+  background-image: url("/images/background.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top;
   color: white;
 }
 
