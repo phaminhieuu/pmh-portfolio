@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import * as THREE from "three";
 import { Text3D, Center, useTexture } from "@react-three/drei";
 import { isMobile } from "react-device-detect";
+import Image from "next/image";
 
 const Text = () => {
   const config = useMemo(
@@ -10,10 +11,10 @@ const Text = () => {
       height: 0.2,
       curveSegments: 12,
       bevelEnabled: true,
-      bevelThickness: 0.03,
+      bevelThickness: 0.01,
       bevelSize: 0.02,
       bevelOffset: 0,
-      bevelSegments: 5,
+      bevelSegments: 1,
     }),
     []
   );
@@ -24,11 +25,9 @@ const Text = () => {
 
   return (
     // <Center>
-    <group position={[-0.5, 0, isMobile ? 12 : 8]}>
+    <group position={[-0.6, 0, isMobile ? 12 : 8]}>
       <Text3D font={"/fonts/Montserrat_Regular.json"} {...config}>
-        nova era
-        {/* <meshNormalMaterial /> */}
-        {/* <icosahedronBufferGeometry args={[]}/> */}
+        minh hieu
         <meshPhysicalMaterial
           metalness={0}
           roughness={0.2}

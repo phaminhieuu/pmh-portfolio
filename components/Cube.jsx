@@ -28,7 +28,6 @@ const TOT = NUM * NUM * NUM;
 export default function Cubes({ mouse, onHold }) {
   const instance = useRef();
   const influence = useRef(0);
-  console.log(isMobile);
 
   const { clock, camera } = useThree();
   const [objects] = useState(() =>
@@ -56,10 +55,9 @@ export default function Cubes({ mouse, onHold }) {
     return [count, positions];
   }, []);
   const [[count, positions], set] = useState(() => update(0));
-  // console.log(count);
 
   useEffect(() => {
-    const id = setInterval(() => set(([count]) => update(count + 1)), 3000);
+    const id = setInterval(() => set(([count]) => update(count + 1)), 2000);
     return () => clearInterval(id);
   }, [update]);
 
@@ -202,13 +200,14 @@ export default function Cubes({ mouse, onHold }) {
         morphTargets
         attach="material"
         vertexColors={THREE.VertexColors}
+        // color={new THREE.Color("#1e1e1e")}
         normalMap={map}
         normalScale={[1, 1]}
         normalMap-wrapS={THREE.RepeatWrapping}
         normalMap-wrapT={THREE.RepeatWrapping}
         normalMap-repeat={[10, 10]}
-        metalness={2}
-        roughness={3}
+        metalness={5}
+        roughness={5}
       />
     </instancedMesh>
   );

@@ -5,13 +5,14 @@ import Cubes from "./Cube";
 import * as THREE from "three";
 import { useState } from "react";
 import Text from "./Text";
+import Loader from "./Loader";
 // import { DotScreen, EffectComposer } from "@react-three/postprocessing";
 // import { BlendFunction } from "postprocessing";
 
 const Lights = () => {
   return (
     <>
-      <ambientLight intensity={0.2} />
+      <ambientLight intensity={0.3} />
       {/* <spotLight
         color={new THREE.Color(0x00fffc)}
         position={[0, 12, 20]}
@@ -29,7 +30,7 @@ const Lights = () => {
         position={[30, 0, 30]}
         angle={0.3}
         // penumbra={1}
-        intensity={1.5}
+        intensity={1.3}
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}

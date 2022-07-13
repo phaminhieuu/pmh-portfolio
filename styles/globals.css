@@ -148,10 +148,6 @@ svg {
   content: "";
 }
 
-canvas {
-  cursor: pointer;
-}
-
 /* :__next  {
   font-size: 20px;
 }

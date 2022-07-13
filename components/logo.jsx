@@ -5,13 +5,14 @@ import { motion } from "framer-motion";
 
 export default function Logo() {
   const line = "Pham Minh Hieu";
+  const subLine = "--Creative/Front-end Developer--";
 
   const sentence = {
     hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
-        delay: 0.5,
+        delay: 2,
         staggerChildren: 0.04,
       },
     },
@@ -30,10 +31,11 @@ export default function Logo() {
         <a>
           <div className="font-bold text-2xl md:text-3xl uppercase flex items-center gap-3 ease-in-out duration-300">
             <Image
-              src="/images/footprint-dark.png"
+              src="/images/square-dark.png"
               width={30}
               height={30}
               alt="logo"
+              style={{ color: "white" }}
             />
             <motion.p variants={sentence} initial="hidden" animate="visible">
               {line.split("").map((char, index) => {
@@ -47,7 +49,21 @@ export default function Logo() {
           </div>
         </a>
       </Link>
-      <div className="my-2 text-sm md:text-xl ease-in-out duration-300">--Creative/Front-end Developer--</div>
+      <motion.p
+        variants={sentence}
+        initial="hidden"
+        animate="visible"
+        className="my-2 text-sm md:text-xl"
+      >
+        {subLine.split("").map((char, index) => {
+          return (
+            <motion.span key={index} variants={letter}>
+              {char}
+            </motion.span>
+          );
+        })}
+      </motion.p>
+      {/* <div className="my-2 text-sm md:text-xl ease-in-out duration-300"></div> */}
     </div>
   );
 }
