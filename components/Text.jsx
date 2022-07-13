@@ -30,7 +30,7 @@ const Text = () => {
         minh hieu
         <meshPhysicalMaterial
           metalness={0}
-          roughness={0.2}
+          roughness={0.3}
           transmission={1}
           thickness={1}
           //   envMap={props}

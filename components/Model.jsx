@@ -12,7 +12,7 @@ import Loader from "./Loader";
 const Lights = () => {
   return (
     <>
-      <ambientLight intensity={0.3} />
+      {/* <ambientLight intensity={0.1} /> */}
       {/* <spotLight
         color={new THREE.Color(0x00fffc)}
         position={[0, 12, 20]}
@@ -29,13 +29,13 @@ const Lights = () => {
       <directionalLight
         position={[30, 0, 30]}
         angle={0.3}
-        // penumbra={1}
-        intensity={1.3}
+        penumbra={1}
+        intensity={1.5}
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
       />
-      {/* <pointLight position={[-30, 0, -30]} intensity={0.3} /> */}
+      <pointLight position={[-30, 0, -30]} intensity={1} />
     </>
   );
 };
