@@ -61,7 +61,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #8A8A8A;
+  background-color: #8a8a8a;
   border-radius: 10px;
 }
 
@@ -166,6 +166,17 @@ svg {
   transform: rotate(180deg);
   transition: transform 1s linear;
 }
+
+.work-item {
+  transform-style: preserve-3d;
+  cursor: url("/images/cursor.png") 20 20, auto;
+  /* cursor: pointer; */
+  /* transition: 0.4s ease-in-out transform, 0.4s ease-in-out box-shadow; */
+}
+
+/* .work-item:hover {
+  transform: rotateX(51deg) rotateZ(43deg);
+} */
 
 /* :__next  {
   font-size: 20px;
