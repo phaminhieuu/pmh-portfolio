@@ -40,7 +40,7 @@ const Lights = () => {
   );
 };
 
-export default function Model() {
+export default function Scene({ path }) {
   const [onHold, setOnHold] = useState(false);
   const mouse = useRef([0, 0]);
   const onMouseMove = useCallback(
@@ -50,7 +50,7 @@ export default function Model() {
   );
 
   return (
-    <div className="w-full h-screen">
+    <div className="fixed w-full h-screen">
       <Canvas
         style={{ cursor: "pointer" }}
         dpr={[1, 2]}
@@ -72,9 +72,9 @@ export default function Model() {
       >
         <Suspense fallback={null}>
           <Lights />
-          <Text />
+          <Text path={path} />
           <group rotation={[Math.PI / 4, Math.PI / 4, 0]}>
-            <Cubes mouse={mouse} onHold={onHold} />
+            <Cubes mouse={mouse} onHold={onHold} path={path} />
           </group>
         </Suspense>
         {/* <OrbitControls /> */}

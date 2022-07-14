@@ -51,6 +51,20 @@ body {
   line-height: 1.5;
 }
 
+/* Restyle scrollbar */
+body::-webkit-scrollbar {
+  width: 0.6em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rbga(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #8A8A8A;
+  border-radius: 10px;
+}
+
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
@@ -146,6 +160,11 @@ svg {
   height: 3px;
   display: block;
   content: "";
+}
+
+.rotate-logo {
+  transform: rotate(180deg);
+  transition: transform 1s linear;
 }
 
 /* :__next  {

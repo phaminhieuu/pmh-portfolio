@@ -3,7 +3,6 @@ import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import Logo from "./logo";
 import NextLink from "next/link";
 import { useInView } from "react-intersection-observer";
-import { useRouter } from "next/router";
 
 const LinkItem = ({ href, path, children }) => {
   const active = path === href;
@@ -83,8 +82,8 @@ const Drawer = ({ href, path, children, isOpen }) => {
 export default function Navbar({ path }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="fixed z-[1000] w-full flex justify-between" as="nav">
-      <Logo />
+    <div className="fixed z-[2000] w-full flex justify-between" as="nav">
+      <Logo path={path} />
 
       <div className="md:block hidden">
         <div className="flex p-6 gap-10">

@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function Logo() {
-  const line = "Pham Minh Hieu";
-  const subLine = "--Creative/Front-end Developer--";
+export default function Logo({ path }) {
+  const [line, setLine] = useState("Pham Minh Hieu");
+  const [subLine, setSubline] = useState("--Creative/Front-end Developer--");
+
+  useEffect(() => {
+    switch (path) {
+      case "/":
+        setLine("Pham Minh Hieu");
+        setSubline("--Creative/Front-end Developer--");
+        break;
+      case "/works":
+        setLine("Works");
+        setSubline("--Projects and Clients--");
+        break;
+      case "/about":
+        setLine("About");
+        setSubline("--My profile--");
+      default:
+        break;
+    }
+  }, [path]);
 
   const sentence = {
     hidden: { opacity: 1 },
@@ -13,7 +31,7 @@ export default function Logo() {
       opacity: 1,
       transition: {
         delay: 2,
-        staggerChildren: 0.04,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -25,6 +43,7 @@ export default function Logo() {
       y: 0,
     },
   };
+
   return (
     <div className="flex-col gap-5 p-5">
       <Link href="/">

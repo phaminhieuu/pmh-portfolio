@@ -15,6 +15,7 @@ import fragmentShader from "../shaders/shader-patterns/fragment.glsl";
 import { clamp } from "../utils/function";
 import niceColors from "nice-color-palettes";
 import { isMobile } from "react-device-detect";
+import { useRouter } from "next/router";
 
 const p3 = (time, threshold) => (a, b, c) =>
   perlin3(
@@ -25,7 +26,7 @@ const p3 = (time, threshold) => (a, b, c) =>
 const NUM = 6;
 const TOT = NUM * NUM * NUM;
 
-export default function Cubes({ mouse, onHold }) {
+export default function Cubes({ mouse, onHold, path }) {
   const instance = useRef();
   const influence = useRef(0);
 
@@ -65,7 +66,7 @@ export default function Cubes({ mouse, onHold }) {
     const a = clock.getElapsedTime();
     camera.position.lerp(vec3.set(0, 0, isMobile ? 15 : 10), 0.1);
 
-    let offset = onHold ? 2 : 1;
+    let offset = path === "/" ? 2 : 3;
     let id = 0;
     for (let z = -NUM / 2; z < NUM / 2; z += 1) {
       for (let y = -NUM / 2; y < NUM / 2; y += 1) {
@@ -77,7 +78,7 @@ export default function Cubes({ mouse, onHold }) {
           let yOffset = lerp(objects[id].position.y, y * offset, 0.2);
           let zOffset = lerp(objects[id].position.z, z * offset, 0.2);
 
-          if (onHold) {
+          if (onHold || path !== "/") {
             objects[id].position.set(xOffset, yOffset, zOffset);
           } else {
             objects[id].position.set(
@@ -169,17 +170,6 @@ export default function Cubes({ mouse, onHold }) {
 
   const map = useLoader(THREE.TextureLoader, "/images/carbon_normal.jpg");
 
-  const colors = useMemo(() => {
-    const array = new Float32Array(TOT * 3);
-    const color = new THREE.Color();
-    for (let i = 0; i < TOT; i++)
-      color
-        .set(niceColors[17][Math.floor(Math.random() * 5)])
-        .convertSRGBToLinear()
-        .toArray(array, i * 3);
-    return array;
-  }, []);
-
   return (
     <instancedMesh
       // position={[0.5, 0.5, 0.5]}
@@ -189,8 +179,12 @@ export default function Cubes({ mouse, onHold }) {
       args={[null, null, TOT]}
       morphTargetInfluences={[1]}
     >
-      {/* <sphereBufferGeometry args={[0.5, 32, 32]} /> */}
-      <boxBufferGeometry args={[1, 1, 1]} />
+      {onHold ? (
+        <sphereBufferGeometry args={[0.5, 32, 32]} />
+      ) : (
+        <boxBufferGeometry args={[1, 1, 1]} />
+      )}
+
       {/* <meshNormalMaterial morphTargets metalness={0.5} roughness={2} /> */}
       {/* <shaderMaterial
         vertexShader={vertexShader}

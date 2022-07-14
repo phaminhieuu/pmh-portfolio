@@ -1,13 +1,12 @@
+import { useProgress } from "@react-three/drei";
 import Head from "next/head";
 import React from "react";
-import Model from "../Model";
-import Navbar from "../navbar";
-import { useProgress } from "@react-three/drei";
 import Loader from "../Loader";
+import Scene from "../Scene";
+import Navbar from "../navbar";
 
 export default function Main({ children, router }) {
-  const { progress, active, loaded, total } = useProgress();
-  console.log(total);
+  const { loaded } = useProgress();
   return (
     <>
       <Head>
@@ -22,7 +21,7 @@ export default function Main({ children, router }) {
           {children}
         </>
       )}
-      <Model />
+      <Scene path={router.asPath} />
 
       {loaded === 0 && <Loader />}
     </>
