@@ -1,10 +1,10 @@
 import create from "zustand";
 
 const useStore = create((set) => ({
-  link: "/",
-  setLink: (newLink) => {
+  index: 1,
+  setIndex: (newIndex) => {
     set((state) => ({
-      link: newLink,
+      index: newIndex,
     }));
   },
 }));

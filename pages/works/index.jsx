@@ -3,15 +3,25 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { isMobile } from "react-device-detect";
+import { listWorks } from "../../constants/listWorks";
+import useStore from "../../store";
 
-const Item = ({ item }) => {
+const Item = ({ work, index }) => {
+  const setIndex = useStore((state) => state.setIndex);
   const itemRef = useRef();
+  const [hover, setHover] = useState(false);
+  const constraint = 25;
+  const router = useRouter();
   //animate
   const controls = useAnimation();
   const [ref, inView] = useInView();
 
   useEffect(() => {
     if (inView) {
+      setIndex(index);
       controls.start({
         scale: 1,
         // opacity: 1,
@@ -31,13 +41,17 @@ const Item = ({ item }) => {
 
   const [calc, setCalc] = useState([0, 0]);
 
-  const handleMouseMove = useCallback((e) => {
-    let box = itemRef.current.getBoundingClientRect();
-    let calcX = (e.clientY - box.y - box.height / 2) / 20;
-    let calcY = (e.clientX - box.x - box.width / 2) / 20;
-
-    setCalc([calcX, calcY]);
-  }, []);
+  const handleMouseMove = useCallback(
+    (e) => {
+      let box = itemRef.current.getBoundingClientRect();
+      let calcX = (e.clientY - box.y - box.height / 2) / constraint;
+      let calcY = (e.clientX - box.x - box.width / 2) / constraint;
+      if (inView) {
+        setCalc([calcX, calcY]);
+      }
+    },
+    [inView]
+  );
 
   useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
@@ -49,21 +63,37 @@ const Item = ({ item }) => {
 
   return (
     <div className="relative w-full h-full" onMouseMove={handleMouseMove}>
-      {/* {console.log(mouse)} */}
       <motion.div
         ref={ref}
         animate={controls}
         className="w-full h-full flex justify-center items-center snap-center"
       >
-        <div
-          ref={itemRef}
-          className="relative work-item h-[200px] sm:h-[300px] lg:h-[500px] w-[80%] md:w-[60%] bg-orange-50 flex justify-center items-center"
-          style={{
-            transform: `rotateX(${calc[0]}deg) rotateY(${calc[1]}deg)`,
-          }}
-        >
-          <h1 className="text-3xl text-red-400">Section {item}</h1>
-        </div>
+        <Link href={work.link}>
+          <div
+            ref={itemRef}
+            className="work-item relative h-[200px] sm:h-[300px] lg:h-[500px] w-[80%] md:w-[60%] overflow-hidden"
+            style={{
+              transform: `rotateX(${calc[0]}deg) rotateY(${calc[1]}deg)`,
+            }}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            //   onClick={() => router.push(work.link)}
+          >
+            <Image src={work.image} alt="item" layout="fill" />
+
+            <div
+              className={`absolute bottom-0 left-0 w-full p-4 ease-in-out duration-500 bg-[rgba(0,0,0,.6)] ${
+                isMobile
+                  ? "translate-y-0"
+                  : hover
+                  ? "translate-y-0"
+                  : "translate-y-full"
+              }`}
+            >
+              <h1 className="text-2xl md:text-4xl uppercase">{work.name}</h1>
+            </div>
+          </div>
+        </Link>
       </motion.div>
     </div>
   );
@@ -107,8 +137,8 @@ const Carousel = () => {
   return (
     <div className="w-full overflow-hidden" ref={viewportRef}>
       <div className="h-screen">
-        {new Array(20).fill(null).map((_, index) => (
-          <Item key={index} item={index + 1} />
+        {listWorks.map((work, index) => (
+          <Item work={work} key={index} index={index + 1} />
         ))}
       </div>
     </div>
@@ -116,9 +146,14 @@ const Carousel = () => {
 };
 
 export default function Works() {
+  const index = useStore((state) => state.index);
   return (
     <div className="absolute top-0 left-0 w-full h-screen z-[1000] overflow-hidden">
       <Carousel />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-2xl py-10 ease-in-out duration-300">
+        {index.toString().padStart(2, "0")}/
+        {listWorks.length.toString().padStart(2, "0")}
+      </div>
     </div>
   );
 }
