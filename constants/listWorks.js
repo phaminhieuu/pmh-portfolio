@@ -58,7 +58,7 @@ export const listWorkDetail = [
     path: "tagent",
     year: 2020,
     website: "https://tagent.vn",
-    description: "Platform for trading NFT such as buy, sell, auction,...",
+    description: "A platform for job hutting for developer",
     stack: ["HTML/CSS", "ReactJS", "Typescript", "C#", "ASP.NET", "SQL Server"],
     image: [
       "/tagent/tagent_01.jpg",
