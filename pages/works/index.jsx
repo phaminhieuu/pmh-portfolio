@@ -24,16 +24,16 @@ const Item = ({ work, index }) => {
       setIndex(index);
       controls.start({
         scale: 1,
-        // opacity: 1,
+        opacity: 1,
         transition: {
-          duration: 1,
+          duration: 0.8,
           type: "spring",
         },
       });
     } else {
       controls.start({
         scale: 0,
-        // opacity: 0,
+        opacity: 0,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,8 +44,8 @@ const Item = ({ work, index }) => {
   const handleMouseMove = useCallback(
     (e) => {
       let box = itemRef.current.getBoundingClientRect();
-      let calcX = (e.clientY - box.y - box.height / 2) / constraint;
-      let calcY = (e.clientX - box.x - box.width / 2) / constraint;
+      let calcX = (e.clientY - box.y - box.height / 2) / 25;
+      let calcY = (e.clientX - box.x - box.width / 2) / 25;
       if (inView) {
         setCalc([calcX, calcY]);
       }

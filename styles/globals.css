@@ -191,10 +191,19 @@ svg {
   opacity: 0;
 }
 
-/* .stack-tag::before {
+.hover-btn {
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), color 0.2s linear,
+    -webkit-transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.hover-btn:hover {
+  color: black;
+}
+
+.hover-btn::before,
+.hover-btn::after {
   position: absolute;
   top: 0;
-  left: 0;
   content: "";
   width: 100%;
   height: 100%;
@@ -203,13 +212,26 @@ svg {
   transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
     background-color 0.2s linear,
     -webkit-transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  transform: scaleX(100%);
-  transform-origin: center left;
-} */
+  transform: scaleX(0);
+  
+}
 
-/* .stack-tag:hover:before {
-  transform: scaleX(100%);
-} */
+.hover-btn::before {
+  left: 0;
+  transform-origin: center left;
+}
+.hover-btn::after {
+  right: 0;
+  transform-origin: right center;
+}
+
+.hover-btn:hover:before {
+  transform: scaleX(50%);
+}
+
+.hover-btn:hover:after {
+  transform: scaleX(51%);
+}
 
 /* .work-item:hover {
   transform: rotateX(51deg) rotateZ(43deg);
