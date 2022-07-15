@@ -1,19 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { listWorkDetail } from "../../constants/listWorks";
 
-const StackTag = () => {
+const StackTag = ({ stack }) => {
   return (
     <a className="relative p-2 mr-3 mb-3 bg-gray-500 inline-block">
-      <span className="ease-linear duration-200">ReactJS</span>
+      <span className="ease-linear duration-200">{stack}</span>
     </a>
   );
 };
 
-const WorkImage = () => {
+const WorkImage = ({image}) => {
   //animate
   const controls = useAnimation();
   const [ref, inView] = useInView();
@@ -24,7 +26,7 @@ const WorkImage = () => {
         scale: 1,
         opacity: 1,
         transition: {
-          duration: 0.8,
+          duration: 0.6,
           type: "easeInOut",
         },
       });
@@ -37,19 +39,29 @@ const WorkImage = () => {
       initial={{ scale: 0, opacity: 0 }}
       ref={ref}
       animate={controls}
-      src="/images/works/tagent_01.jpg"
+      src={`/images/works${image}`}
       alt="tagent"
       className="w-full object-cover my-10"
     />
   );
 };
 
-export default function Tagent() {
+export default function WorkDetail() {
+  const router = useRouter();
+  const [work, setWork] = useState(listWorkDetail[0]);
+
   const variants = {
     hidden: { opacity: 0, y: 50 },
     enter: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: 50 },
   };
+
+  useEffect(() => {
+    if (!router.query) return;
+    const currentWork = router.query.work;
+    const workItem = listWorkDetail.find((w) => w.path === currentWork);
+    setWork(workItem);
+  }, [router]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-screen z-[1000] overflow-y-auto  py-[20vh] bg-[rgba(20,20,20,.6)]">
@@ -58,7 +70,7 @@ export default function Tagent() {
         animate="enter"
         exit="exit"
         variants={variants}
-        transition={{ duration: 0.8, type: "easeInOut" }}
+        transition={{ duration: 0.6, type: "easeInOut" }}
         className="w-full h-screen flex justify-center"
       >
         <div className="w-[80%] md:w-[60%]">
@@ -72,6 +84,7 @@ export default function Tagent() {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
+                  style={{ zIndex: 2000 }}
                 >
                   <path
                     strokeLinecap="round"
@@ -82,8 +95,10 @@ export default function Tagent() {
                 <span className="relative z-[2000]">Works</span>
               </div>
             </Link>
-            <h1 className="text-5xl font-bold uppercase mr-2">Tagent</h1>
-            <div className="font-bold bg-gray-500 p-1 rounded-lg">2021</div>
+            <h1 className="text-5xl font-bold uppercase mr-2">{work.name}</h1>
+            <div className="font-bold bg-gray-500 p-1 rounded-lg">
+              {work.year}
+            </div>
           </div>
 
           <div className="my-10 ml-1">
@@ -91,12 +106,12 @@ export default function Tagent() {
             <div className="flex items-center gap-5 mb-5">
               <p>Website:</p>
               <Link href="https://tagent.vn">
-                <div className="flex cursor-pointer bg-[#1e1e1e] p-1 border-4 hover:bg-slate-400]">
-                  <p>https://tagent.vn</p>
+                <div className="relative flex cursor-pointer bg-[#1e1e1e] p-1 border-4 hover-btn">
+                  <span className="relative z-[2000]">{work.website}</span>
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
+                      className="h-6 w-6 relative z-[2000]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -116,15 +131,15 @@ export default function Tagent() {
             {/* Description */}
             <div className="flex gap-5 mb-5">
               <p>Description:</p>
-              <span>A platform for job hutting for developer</span>
+              <span>{work.description}</span>
             </div>
 
             {/* Stack */}
             <div className="flex items-start gap-5 w-full max-h-full">
               <p className="py-2">Stack:</p>
               <div className="">
-                {new Array(20).fill(null).map((_, index) => (
-                  <StackTag key={index} />
+                {work.stack.map((stack, index) => (
+                  <StackTag stack={stack} key={index} />
                 ))}
               </div>
             </div>
@@ -144,8 +159,8 @@ export default function Tagent() {
           />
         ))} */}
           <div className="pb-20">
-            {new Array(3).fill(null).map((_, index) => (
-              <WorkImage key={index} />
+            {work.image.map((image, index) => (
+              <WorkImage key={index} image={image} />
             ))}
           </div>
         </div>

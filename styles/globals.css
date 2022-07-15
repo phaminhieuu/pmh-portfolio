@@ -200,6 +200,10 @@ svg {
   color: black;
 }
 
+/* .hover-btn:hover svg {
+  color: red;
+} */
+
 .hover-btn::before,
 .hover-btn::after {
   position: absolute;
@@ -213,7 +217,6 @@ svg {
     background-color 0.2s linear,
     -webkit-transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transform: scaleX(0);
-  
 }
 
 .hover-btn::before {
@@ -222,7 +225,7 @@ svg {
 }
 .hover-btn::after {
   right: 0;
-  transform-origin: right center;
+  transform-origin: center right;
 }
 
 .hover-btn:hover:before {
