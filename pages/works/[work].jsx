@@ -42,6 +42,7 @@ const WorkImage = ({ image }) => {
       src={`/images/works${image}`}
       alt="tagent"
       className="w-full object-cover my-10"
+      lazy="true"
     />
   );
 };
@@ -64,7 +65,7 @@ export default function WorkDetail() {
   }, [router]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-screen z-[1000] overflow-y-auto  py-[20vh] bg-[rgba(20,20,20,.6)]">
+    <div className="fixed top-0 left-0 w-full h-screen z-[1000] text-xs sm:text-base overflow-hidden overflow-y-auto py-[20vh] bg-[rgba(20,20,20,.6)]">
       <motion.article
         initial="hidden"
         animate="enter"
@@ -74,16 +75,16 @@ export default function WorkDetail() {
         className="w-full h-screen flex justify-center"
       >
         <div className="w-[80%] md:w-[60%]">
-          <div className="flex items-center mb-10">
+          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center mb-10">
             <Link href="/works">
-              <div className="relative flex p-2 bg-[#1e1e1e] border-4 uppercase cursor-pointer mr-10 hover-btn">
+              <div className="relative flex p-1 sm:p-2 bg-[#1e1e1e] border-4 uppercase cursor-pointer mr-10 hover-btn">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-4 w-4 sm:h-6 sm:w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                   style={{ zIndex: 2000 }}
                 >
                   <path
@@ -95,9 +96,11 @@ export default function WorkDetail() {
                 <span className="relative z-[2000]">Works</span>
               </div>
             </Link>
-            <h1 className="text-5xl font-bold uppercase mr-2">{work.name}</h1>
-            <div className="font-bold bg-gray-500 p-1 rounded-lg">
-              {work.year}
+            <div className="flex items-center">
+              <h1 className="text-4xl sm:text-5xl font-bold uppercase mr-2">{work.name}</h1>
+              <div className="font-bold bg-gray-500 p-1 rounded-lg">
+                {work.year}
+              </div>
             </div>
           </div>
 
@@ -119,7 +122,7 @@ export default function WorkDetail() {
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 relative z-[2000]"
+                        className="h-4 w-4 sm:h-6 sm:w-6 relative z-[2000]"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -167,7 +170,7 @@ export default function WorkDetail() {
             priority
           />
         ))} */}
-          <div className="pb-20">
+          <div className="pb-10">
             {work.image.map((image, index) => (
               <WorkImage key={index} image={image} />
             ))}

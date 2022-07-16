@@ -71,7 +71,9 @@ const Item = ({ work, index }) => {
         <Link href={work.link}>
           <div
             ref={itemRef}
-            className="work-item relative h-[200px] sm:h-[300px] lg:h-[500px] w-[80%] md:w-[60%] overflow-hidden"
+            className={`${
+              !isMobile && "work-item"
+            } transform-3d relative h-[200px] sm:h-[300px] lg:h-[500px] w-[80%] md:w-[60%] overflow-hidden`}
             style={{
               transform: `rotateX(${calc[0]}deg) rotateY(${calc[1]}deg)`,
             }}

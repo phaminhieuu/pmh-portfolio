@@ -167,7 +167,7 @@ svg {
   transition: transform 1s linear;
 }
 
-.work-item {
+.transform-3d {
   transform-style: preserve-3d;
   /* cursor: url("/images/cursor.png") 20 20, auto; */
   cursor: pointer;

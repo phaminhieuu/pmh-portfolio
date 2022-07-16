@@ -6,24 +6,22 @@ import { motion } from "framer-motion";
 export default function Logo({ path }) {
   const [line, setLine] = useState("Pham Minh Hieu");
   const [subLine, setSubline] = useState("--Creative/Front-end Developer--");
+  
 
   useEffect(() => {
-    switch (path) {
-      case "/":
-        setLine("Pham Minh Hieu");
-        setSubline("--Creative/Front-end Developer--");
-        break;
-      case "/works":
-        setLine("Works");
-        setSubline("--Projects and Clients--");
-        break;
-      case "/about":
-        setLine("About");
-        setSubline("--My profile--");
-      default:
-        break;
+    if (path === "/") {
+      setLine("Pham Minh Hieu");
+      setSubline("--Creative/Front-end Developer--");
+    } else if (path.includes("works")) {
+      setLine("Works");
+      setSubline("--Projects and Clients--");
+    } else if (path === "/about") {
+      setLine("About");
+      setSubline("--My profile--");
     }
   }, [path]);
+
+  
 
   const sentence = {
     hidden: { opacity: 1 },
