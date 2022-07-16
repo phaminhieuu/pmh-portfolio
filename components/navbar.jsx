@@ -4,6 +4,7 @@ import Logo from "./logo";
 import NextLink from "next/link";
 import { useInView } from "react-intersection-observer";
 import { checkPath } from "../utils/function";
+import useStore from "../store";
 
 const LinkItem = ({ href, path, children }) => {
   let active = false;
@@ -103,31 +104,13 @@ const Drawer = ({ href, path, children, isOpen, setIsOpen }) => {
 
 export default function Navbar({ path }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [background, setBackground] = useState(false);
-
-  const handleScroll = useCallback(() => {
-    console.log(window.scrollY);
-    if (window.scrollY > 25) {
-      setBackground(true);
-    } else {
-      setBackground(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Handler to call on window scroll
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleScroll]);
+  const haveBg = useStore((state) => state.haveBg);
 
   return (
     <div
       className={`fixed z-[2000] w-full flex justify-between ${
-        background && "bg-[rgb(20,20,20)]"
-      }`}
+        haveBg && "bg-[rgba(20,20,20,.7)]"
+      } ease-in-out duration-200`}
       as="nav"
     >
       <Logo path={path} />
@@ -146,19 +129,18 @@ export default function Navbar({ path }) {
         </div>
       </div>
 
-      <button
-        className={`fixed z-[1001] md:hidden w-7 h-7 mr-10 mb-8 bottom-0 right-0 ${
-          isOpen && "menu-opened"
-        }`}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <p id="btnMenu">
-          <span className="menu_line"></span>
-          <span className="menu_line"></span>
-          <span className="menu_line"></span>
-        </p>
-      </button>
-
+      <div className="md:hidden fixed z-[1001] border-2 bottom-0 right-0 mr-10 mb-8 p-1 bg-[rgba(20,20,20,.7)]">
+        <button
+          className={`w-[1.78rem] h-7 ${isOpen && "menu-opened"}`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <p id="btnMenu">
+            <span className="menu_line"></span>
+            <span className="menu_line"></span>
+            <span className="menu_line"></span>
+          </p>
+        </button>
+      </div>
       <Drawer isOpen={isOpen} path={path} setIsOpen={setIsOpen} />
     </div>
   );

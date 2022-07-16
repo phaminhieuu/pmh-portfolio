@@ -63,7 +63,6 @@ export default function Scene({ path }) {
         }}
         shadows
         onMouseMove={onMouseMove}
-        // onTouchMove={onMouseMove}
         onMouseUp={() => setOnHold(false)}
         onMouseDown={() => setOnHold(true)}
         onMouseLeave={() => setOnHold(false)}

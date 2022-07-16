@@ -44,8 +44,8 @@ const Item = ({ work, index }) => {
   const handleMouseMove = useCallback(
     (e) => {
       let box = itemRef.current.getBoundingClientRect();
-      let calcX = (e.clientY - box.y - box.height / 2) / 25;
-      let calcY = (e.clientX - box.x - box.width / 2) / 25;
+      let calcX = (e.clientY - box.y - box.height / 2) / 20;
+      let calcY = (e.clientX - box.x - box.width / 2) / 20;
       if (inView) {
         setCalc([calcX, calcY]);
       }
@@ -103,6 +103,8 @@ const Item = ({ work, index }) => {
 
 const Carousel = () => {
   const scrollRef = useRef();
+  const { query: queryParams } = useRouter();
+  console.log(queryParams.current);
 
   const [viewportRef, embla] = useEmblaCarousel({
     axis: "y",
@@ -110,6 +112,11 @@ const Carousel = () => {
     loop: true,
     align: "end",
   });
+
+  useEffect(() => {
+    if (!queryParams.current) return;
+    embla && embla.scrollTo(queryParams.current);
+  }, [embla, queryParams]);
 
   const handleScroll = useCallback(
     (e) => {
@@ -152,7 +159,7 @@ export default function Works() {
   return (
     <div className="absolute top-0 left-0 w-full h-screen z-[1000] overflow-hidden">
       <Carousel />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-2xl py-10 ease-in-out duration-300">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-2xl py-7 ease-in-out duration-300">
         {index.toString().padStart(2, "0")}/
         {listWorks.length.toString().padStart(2, "0")}
       </div>

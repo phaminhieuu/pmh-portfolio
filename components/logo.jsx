@@ -43,7 +43,7 @@ export default function Logo({ path }) {
   };
 
   return (
-    <div className="flex-col gap-5 p-5">
+    <div className="flex-col gap-5 p-3">
       <Link href="/">
         <a>
           <div className="font-bold text-2xl md:text-3xl uppercase flex items-center gap-3 ease-in-out duration-300">

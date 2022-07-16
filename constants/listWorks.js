@@ -24,11 +24,13 @@ export const listWorks = [
 
 export const listWorkDetail = [
   {
+    index: 0,
     name: "NftSpaceX",
     path: "nftspacex",
     year: 2022,
     website: "https://nftspacex.io/",
     description: "Platform for trading NFT such as buy, sell, auction,...",
+    role: ["Front-end"],
     stack: [
       "HTML/CSS",
       "ReactJS",
@@ -45,20 +47,24 @@ export const listWorkDetail = [
     ],
   },
   {
+    index: 1,
     name: "Napco",
     path: "napco",
     year: 2021,
     website: "Private",
     description: "Attendance software for construction company Napco.inc",
+    role: ["Team lead", "Front-end", "Back-end"],
     stack: ["HTML/CSS", "ReactJS", "NodeJS", "Typescript", "MongoDB"],
     image: ["/napco/napco.png"],
   },
   {
+    index: 2,
     name: "Tagent",
     path: "tagent",
     year: 2020,
     website: "https://tagent.vn",
     description: "A platform for job hutting for developer",
+    role: ["Team lead", "Front-end"],
     stack: ["HTML/CSS", "ReactJS", "Typescript", "C#", "ASP.NET", "SQL Server"],
     image: [
       "/tagent/tagent_01.jpg",
@@ -67,11 +73,13 @@ export const listWorkDetail = [
     ],
   },
   {
+    index: 3,
     name: "Pham Minh Hieu",
     path: "phamminhhieu",
     year: 2022,
     website: "https://minhhieu-pham.vercel.app/",
     description: "My portfolio website",
+    role: ["Design", "Front-end"],
     stack: ["HTML/CSS", "NextJS", "ThreeJS", "WebGL"],
     image: ["/phamminhhieu/phamminhhieu.png"],
   },

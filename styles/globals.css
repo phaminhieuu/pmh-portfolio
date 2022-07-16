@@ -156,7 +156,7 @@ svg {
   -webkit-transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   background-color: #ffffff;
-  width: 100%;
+  width: 80%;
   height: 3px;
   display: block;
   content: "";
