@@ -53,7 +53,7 @@ export const listWorkDetail = [
     year: 2021,
     website: "Private",
     description: "Attendance software for construction company Napco.inc",
-    role: ["Team lead", "Front-end", "Back-end"],
+    role: ["Front-end", "Back-end"],
     stack: ["HTML/CSS", "ReactJS", "NodeJS", "Typescript", "MongoDB"],
     image: ["/napco/napco.png"],
   },
@@ -64,7 +64,7 @@ export const listWorkDetail = [
     year: 2020,
     website: "https://tagent.vn",
     description: "A platform for job hutting for developer",
-    role: ["Team lead", "Front-end"],
+    role: ["Front-end"],
     stack: ["HTML/CSS", "ReactJS", "Typescript", "C#", "ASP.NET", "SQL Server"],
     image: [
       "/tagent/tagent_01.jpg",

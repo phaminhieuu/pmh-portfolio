@@ -66,7 +66,7 @@ export default function Cubes({ mouse, onHold, path }) {
     const a = clock.getElapsedTime();
     camera.position.lerp(vec3.set(0, 0, isMobile ? 15 : 10), 0.1);
 
-    let offset = path === "/" ? 2 : 3;
+    let offset = path === "/" ? 2.5 : 3;
     let id = 0;
     for (let z = -NUM / 2; z < NUM / 2; z += 1) {
       for (let y = -NUM / 2; y < NUM / 2; y += 1) {

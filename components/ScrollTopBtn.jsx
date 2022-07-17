@@ -27,7 +27,7 @@ const ScrollTopBtn = ({ scrollTop, show }) => {
     <motion.div
       onClick={scrollTop}
       animate={controls}
-      className="fixed bottom-0 right-0 text-base cursor-pointer md:text-2xl flex flex-col justify-center items-center mb-20 mr-10 md:mb-5 md:mr-10 border-2 p-1 bg-[rgba(20,20,20,.8)]"
+      className="fixed bottom-0 right-0 text-base cursor-pointer md:text-2xl flex flex-col justify-center items-center mb-20 mr-10 md:mb-5 md:mr-10 border-2 p-1 bg-[rgba(20,20,20,.8)] hover:bg-black ease-linear duration-200"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

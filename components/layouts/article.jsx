@@ -35,7 +35,7 @@ export default function Article({ children }) {
   }, []);
   return (
     <div
-      className="absolute top-0 left-0 w-full h-screen z-[1000] text-xs sm:text-base overflow-hidden overflow-y-auto py-[15vh] bg-[rgba(20,20,20,.6)]"
+      className="absolute top-0 left-0 w-full h-screen z-[1000] text-sm sm:text-xl overflow-hidden overflow-y-auto py-[15vh] bg-[rgba(20,20,20,.6)]"
       onScroll={handleScroll}
       ref={container}
     >

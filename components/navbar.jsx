@@ -129,7 +129,7 @@ export default function Navbar({ path }) {
         </div>
       </div>
 
-      <div className="md:hidden fixed z-[1001] border-2 bottom-0 right-0 mr-10 mb-8 p-1 bg-[rgba(20,20,20,.7)]">
+      <div className="md:hidden fixed z-[1001] border-2 bottom-0 right-0 mr-10 mb-8 p-1 bg-[rgba(20,20,20,.7)] hover:bg-black ease-linear duration-200">
         <button
           className={`w-[1.78rem] h-7 ${isOpen && "menu-opened"}`}
           onClick={() => setIsOpen(!isOpen)}

@@ -229,11 +229,11 @@ svg {
 }
 
 .hover-btn:hover:before {
-  transform: scaleX(50%);
+  transform: scaleX(51%);
 }
 
 .hover-btn:hover:after {
-  transform: scaleX(51%);
+  transform: scaleX(50%);
 }
 
 /* .work-item:hover {

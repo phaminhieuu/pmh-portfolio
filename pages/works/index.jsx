@@ -104,7 +104,6 @@ const Item = ({ work, index }) => {
 const Carousel = () => {
   const scrollRef = useRef();
   const { query: queryParams } = useRouter();
-  console.log(queryParams.current);
 
   const [viewportRef, embla] = useEmblaCarousel({
     axis: "y",
