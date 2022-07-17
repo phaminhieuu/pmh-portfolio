@@ -1,4 +1,4 @@
-import { useFrame, useLoader, useThree } from "@react-three/fiber";
+import { useFrame, useLoader, useThree, extend } from "@react-three/fiber";
 import {
   useCallback,
   useEffect,
@@ -16,6 +16,9 @@ import { clamp } from "../utils/function";
 import niceColors from "nice-color-palettes";
 import { isMobile } from "react-device-detect";
 import { useRouter } from "next/router";
+import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry";
+
+extend({ RoundedBoxGeometry });
 
 const p3 = (time, threshold) => (a, b, c) =>
   perlin3(
@@ -182,7 +185,7 @@ export default function Cubes({ mouse, onHold, path }) {
       {onHold ? (
         <sphereBufferGeometry args={[0.5, 32, 32]} />
       ) : (
-        <boxBufferGeometry args={[1, 1, 1]} />
+        <roundedBoxGeometry args={[1, 1, 1, 1, 0.08]} />
       )}
 
       {/* <meshNormalMaterial morphTargets metalness={0.5} roughness={2} /> */}
