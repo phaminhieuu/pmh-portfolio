@@ -39,7 +39,7 @@ const Text = ({ path }) => {
 
   return (
     // <Center>
-    <group position={[-0.6, 0, isMobile ? 12 : 8]} ref={text}>
+    <group position={[-0.7, 0, isMobile ? 12 : 8]} ref={text}>
       <Text3D font={"/fonts/Montserrat_Regular.json"} {...config}>
         minh hieu
         <meshPhysicalMaterial

@@ -7,15 +7,10 @@ import {
   useLayoutEffect,
   useMemo,
 } from "react";
-import perlin3 from "../utils/perlin";
+import perlin3 from "../../utils/perlin";
 import * as THREE from "three";
 import lerp from "lerp";
-import vertexShader from "../shaders/shader-patterns/vertex.glsl";
-import fragmentShader from "../shaders/shader-patterns/fragment.glsl";
-import { clamp } from "../utils/function";
-import niceColors from "nice-color-palettes";
 import { isMobile } from "react-device-detect";
-import { useRouter } from "next/router";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry";
 
 extend({ RoundedBoxGeometry });
@@ -187,17 +182,10 @@ export default function Cubes({ mouse, onHold, path }) {
       ) : (
         <roundedBoxGeometry args={[1, 1, 1, 1, 0.08]} />
       )}
-
-      {/* <meshNormalMaterial morphTargets metalness={0.5} roughness={2} /> */}
-      {/* <shaderMaterial
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-      /> */}
       <meshPhongMaterial
         morphTargets
         attach="material"
         vertexColors={THREE.VertexColors}
-        // color={new THREE.Color("#1e1e1e")}
         normalMap={map}
         normalScale={[1, 1]}
         normalMap-wrapS={THREE.RepeatWrapping}

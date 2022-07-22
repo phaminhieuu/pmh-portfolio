@@ -2,7 +2,7 @@ import { useProgress } from "@react-three/drei";
 import Head from "next/head";
 import React from "react";
 import Loader from "../Loader";
-import Scene from "../Scene";
+import Scene from "../3DObject/Scene";
 import Navbar from "../navbar";
 
 export default function Main({ children, router }) {

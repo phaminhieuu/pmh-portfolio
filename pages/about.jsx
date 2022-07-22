@@ -70,7 +70,7 @@ export default function About() {
         <Wrapper>
           <Title>My skills</Title>
           <Paragraph>
-            Javascript / HTML / CSS / SASS / SCSS / ReactJS / NextJS / ReactNative / NodeJS /
+            Javascript / HTML / CSS / SASS / SCSS / ReactJS / NextJS / NodeJS /
             ThreeJS / WebGL / SQLServer / MongoDB / Jest / Git / Blender
           </Paragraph>
         </Wrapper>
@@ -81,9 +81,9 @@ export default function About() {
             <SocialBtn
               icon="email-light.png"
               altIcon="email-dark.png"
-              link=""
               text="Email"
-              style="text-gray-400 border-gray-400 hover:text-black before:bg-gray-400 after:bg-gray-400"
+              link="mailto:minhhieupham851999@gmail.com"
+              // style="text-gray-400 border-gray-400 hover:text-black before:bg-gray-400 after:bg-gray-400"
             />
             <SocialBtn
               icon="facebook-light.png"
@@ -101,11 +101,10 @@ export default function About() {
             />
 
             <SocialBtn
-              icon="github.png"
-              altIcon="github.png"
+              icon="github-dark.png"
+              altIcon="github-light.png"
               text="Github"
               link="https://github.com/phamminhhieu85"
-              
             />
           </div>
         </Wrapper>

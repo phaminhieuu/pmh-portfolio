@@ -5,7 +5,7 @@ import Cubes from "./Cube";
 import * as THREE from "three";
 import { useState } from "react";
 import Text from "./Text";
-import Loader from "./Loader";
+import Loader from "../Loader";
 // import { DotScreen, EffectComposer } from "@react-three/postprocessing";
 // import { BlendFunction } from "postprocessing";
 
