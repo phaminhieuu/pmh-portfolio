@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --font-instrument: var(--font-instrument);
+
+  --color-background: var(--color-zinc-950);
+  --color-foreground: var(--color-zinc-300);
+  --color-accent: var(--color-zinc-100);
+  --color-muted: var(--color-zinc-800);
+  --color-muted-foreground: var(--color-zinc-500);
+  --color-border: var(--color-zinc-700);
+}
+
+@layer base {
+  * {
+    @apply border-border scroll-smooth scroll-mt-20;
+  }
+
+  body {
+    @apply bg-background text-foreground font-light text-lg;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply rounded-md;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-800 rounded-md;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofi ll:active {
+    -webkit-transition-delay: 9999s;
+    transition-delay: 9999s;
+  }
+}
+
+.bg-night {
+  background-image: linear-gradient(45deg,
+      hsl(240 10% 3.9%),
+      hsl(240 3.7% 15.9%),
+      hsl(240 10% 3.9%),
+      hsl(240 3.7% 15.9%));
+
+  background-size: 200% 100%;
+}
