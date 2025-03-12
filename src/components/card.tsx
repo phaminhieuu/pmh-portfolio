@@ -1,11 +1,12 @@
 import { cn } from "@/utils/cn";
-import { Link } from "./icons";
+import { Info, Link } from "./icons";
 
 interface Props {
 	children: React.ReactNode;
 	className?: string;
 	description: string;
 	link?: string;
+	info?: string;
 }
 
 export default function Card({
@@ -13,6 +14,7 @@ export default function Card({
 	className,
 	description,
 	link,
+	info,
 }: Props) {
 	return (
 		<div
@@ -36,6 +38,14 @@ export default function Card({
 				>
 					<Link className="size-5" />
 				</a>
+			)}
+
+			{info && (
+				<div className="absolute top-4 left-4 rounded-full bg-muted/60 p-2 hover:bg-muted flex  gap-2 w-9 hover:w-fit duration-200 ease-out cursor-pointer overflow-hidden">
+					<Info className="size-5 shrink-0" />
+
+					<p className="text-sm shrink-0">{info}</p>
+				</div>
 			)}
 		</div>
 	);

@@ -1,14 +1,19 @@
-import { useTexture } from "@react-three/drei";
+import { useProgress, useTexture } from "@react-three/drei";
 import frag from "./shaders/frag.fs";
 import vert from "./shaders/vert.vs";
 import * as THREE from "three";
 import { type ThreeEvent, useFrame } from "@react-three/fiber";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { animate } from "motion";
 import { useControls } from "leva";
+import { useResize } from "./useResize";
+import useLayout from "./useLayout";
 
 export default function Wobble() {
+	const mesh = useRef<THREE.Mesh>(null);
 	const [cursor] = useState(new THREE.Vector2(9999, 9999));
+
+	const { progress } = useProgress();
 
 	const {
 		amplitude,
@@ -28,13 +33,19 @@ export default function Wobble() {
 		// Noise
 		noiseFrequency: { value: 20, min: 0, max: 50 },
 		noiseSpeed: { value: 0.5, min: 0, max: 10 },
-		noiseStrength: { value: 0.1, min: 0, max: 1 },
+		noiseStrength: { value: 0.15, min: 0, max: 1 },
 	});
 
 	const tex = useTexture("/texture/text.png", (texture) => {
 		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 		texture.minFilter = THREE.LinearFilter;
 		texture.magFilter = THREE.LinearFilter;
+	});
+
+	useLayout({
+		object: mesh.current,
+		scale: 0.75,
+		loaded: progress === 100,
 	});
 
 	const [shaderMaterial] = useState(
@@ -134,6 +145,7 @@ export default function Wobble() {
 
 	return (
 		<mesh
+			ref={mesh}
 			rotation={[0, 0, 0.4]}
 			position={[-1.8, -1.8, 0]}
 			material={shaderMaterial}

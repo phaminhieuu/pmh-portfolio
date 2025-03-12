@@ -5,15 +5,15 @@ import Wobble from "./wobble";
 import { Leva } from "leva";
 
 export default function Scene() {
-  return (
-    <div className="absolute inset-0">
-      <Leva />
-      <Canvas dpr={[1, 2]}>
-        <Suspense fallback="Loading">
-          <Wobble />
-         {/* <OrbitControls /> */}
-        </Suspense>
-      </Canvas>
-    </div>
-  );
+	return (
+		<div className="absolute inset-0">
+			<Leva hidden />
+			<Canvas dpr={[1, 2]}>
+				<Suspense fallback="Loading">
+					<Wobble />
+					{/* <OrbitControls /> */}
+				</Suspense>
+			</Canvas>
+		</div>
+	);
 }

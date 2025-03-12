@@ -21,7 +21,7 @@ export default function HomePage() {
 		<div>
 			<Loader loaded={loaded} />
 			<Background />
-			<div className="h-[95vh] w-full overflow-hidden relative">
+			<div className="h-[90vh] sm:h-[95vh] w-full overflow-hidden relative">
 				<Scene />
 
 				<div className="absolute right-5 top-14 md:top-28 text-5xl sm:text-6xl md:text-8xl xl:text-9xl text-right space-y-2">
@@ -40,7 +40,7 @@ export default function HomePage() {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: loaded ? 1 : 0 }}
 						transition={{ delay: 0.5 }}
-						className="text-base sm:text-xl md:text-3xl xl:text-4xl text-muted-foreground"
+						className="text-xl md:text-3xl xl:text-4xl text-muted-foreground"
 					>
 						[Creative Developer]
 					</motion.p>
