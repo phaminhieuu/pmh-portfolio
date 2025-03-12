@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import Wobble from "./wobble";
 import { Leva } from "leva";
+import { Preload } from "@react-three/drei";
 
 export default function Scene() {
 	return (
@@ -13,6 +14,7 @@ export default function Scene() {
 					<Wobble />
 					{/* <OrbitControls /> */}
 				</Suspense>
+				<Preload all />
 			</Canvas>
 		</div>
 	);

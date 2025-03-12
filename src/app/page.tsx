@@ -4,14 +4,14 @@ import { motion } from "motion/react";
 import dynamic from "next/dynamic";
 import { useProgress } from "@react-three/drei";
 import Loader from "@/components/loader";
-import Works from "@/components/works";
-import Personal from "@/components/personal";
+
+const Works = dynamic(() => import("@/components/works"));
+const Personal = dynamic(() => import("@/components/personal"));
+const Background = dynamic(() => import("@/components/background"));
 
 const Scene = dynamic(() => import("@/components/scene"), {
 	ssr: false,
 });
-
-const Background = dynamic(() => import("@/components/background"));
 
 export default function HomePage() {
 	const { progress } = useProgress();

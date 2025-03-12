@@ -49,6 +49,7 @@ export default function Personal() {
 							loop
 							muted
 							playsInline
+							preload="none"
 							className="size-full object-cover"
 						>
 							<source
@@ -72,6 +73,7 @@ export default function Personal() {
 							loop
 							muted
 							playsInline
+							preload="none"
 							className="size-full object-cover"
 						>
 							<source src="/works/draggable.mp4" type="video/mp4;codecs=hvc1" />
@@ -95,6 +97,7 @@ export default function Personal() {
 							loop
 							muted
 							playsInline
+							preload="none"
 							className="size-full object-cover"
 						>
 							<source src="/works/kishimisu.mp4" type="video/mp4;codecs=hvc1" />
@@ -116,6 +119,7 @@ export default function Personal() {
 							loop
 							muted
 							playsInline
+							preload="none"
 							className="size-full object-cover"
 						>
 							<source
@@ -139,6 +143,7 @@ export default function Personal() {
 							loop
 							muted
 							playsInline
+							preload="none"
 							className="size-full object-cover"
 						>
 							<source src="/works/ballpit.webm" type="video/webm;codecs=vp9" />

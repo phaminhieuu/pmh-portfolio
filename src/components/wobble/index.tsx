@@ -6,7 +6,6 @@ import { type ThreeEvent, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { animate } from "motion";
 import { useControls } from "leva";
-import { useResize } from "./useResize";
 import useLayout from "./useLayout";
 
 export default function Wobble() {
