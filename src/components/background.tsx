@@ -1,6 +1,6 @@
 export default function Background() {
 	return (
-		<div className="fixed inset-0 -z-2">
+		<div className="fixed inset-0 -z-1">
 			<svg
 				width="100%"
 				height="100%"

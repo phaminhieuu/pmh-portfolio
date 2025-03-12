@@ -1,4 +1,4 @@
-This is my portfolio website.
+My portfolio website
 
 ## Techstack:
 
@@ -6,6 +6,7 @@ This is my portfolio website.
 - Tailwind CSS
 - Framer Motion
 - Three.js
+- React Three Fiber
 
 First, run the development server:
 

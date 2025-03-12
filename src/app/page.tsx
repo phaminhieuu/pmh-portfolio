@@ -19,8 +19,8 @@ export default function HomePage() {
 
 	return (
 		<div>
-			{/* <Loader loaded={loaded} /> */}
-			{/* <Background /> */}
+			<Loader loaded={loaded} />
+			<Background />
 			<div className="h-[95vh] w-full overflow-hidden relative">
 				<Scene />
 
