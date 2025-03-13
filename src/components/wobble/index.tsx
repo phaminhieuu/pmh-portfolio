@@ -27,7 +27,7 @@ export default function Wobble() {
 		amplitude: { value: 0.4, min: 0, max: 1 },
 		positionFrequency: { value: 0.5, min: 0, max: 1 },
 		timeFrequency: { value: 0.1, min: 0, max: 1 },
-		texSpeed: { value: 0.05, min: 0, max: 1 },
+		texSpeed: { value: 0.5, min: 0, max: 1 },
 
 		// Noise
 		noiseFrequency: { value: 20, min: 0, max: 50 },
@@ -86,6 +86,8 @@ export default function Wobble() {
 		uniforms.uTexSpeed = { value: texSpeed };
 		uniforms.uNoiseFrequency = { value: noiseFrequency };
 		uniforms.uNoiseSpeed = { value: noiseSpeed };
+
+		animate(uniforms.uTexSpeed, { value: 0.05 }, { duration: 1.5 });
 	}, [
 		amplitude,
 		positionFrequency,

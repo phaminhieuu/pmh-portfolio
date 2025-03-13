@@ -40,7 +40,7 @@ void main() {
     vec2 distortion = vec2(noiseX, noiseY) * hover * uNoiseStrength;
 
     // Glitch effect
-    float glitchDuration = 1.0;
+    float glitchDuration = 1.5;
     float glitchStrength = step(uTime, glitchDuration) * (1.0 - uTime / glitchDuration);
     float glitchOffset = glitchStrength * (random(uv.y) - 0.5) * 0.05;
     uv.x += glitchOffset;

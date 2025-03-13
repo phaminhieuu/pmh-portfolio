@@ -11,7 +11,8 @@
 				"useTemplate": "off"
 			},
 			"a11y": {
-				"useKeyWithClickEvents": "off"
+				"useKeyWithClickEvents": "off",
+				"useSemanticElements": "off"
 			},
 			"suspicious": {
 				"noArrayIndexKey": "off",

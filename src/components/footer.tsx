@@ -3,7 +3,11 @@ import Link from "./link";
 
 export default function Footer() {
 	return (
-		<footer className="bg-night p-5 py-8 font-mono text-sm">
+		<footer
+			role="contentinfo"
+			aria-hidden={true}
+			className="bg-night p-5 py-8 font-mono text-sm"
+		>
 			<div className="container mx-auto max-w-3xl flex flex-col justify-between items-center sm:flex-row gap-5">
 				<div className="flex items-center gap-2">
 					<Logo className="size-7 sm:size-10" />

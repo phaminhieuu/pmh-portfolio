@@ -30,7 +30,10 @@ export default function RootLayout({
 			<head>
 				<link rel="icon" href="/cursor.png" />
 			</head>
-			<body className={`${inter.className} ${instrumentSans.variable}`}>
+			<body
+				suppressHydrationWarning
+				className={`${inter.className} ${instrumentSans.variable}`}
+			>
 				{children}
 				<Footer />
 			</body>

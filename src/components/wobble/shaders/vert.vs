@@ -21,7 +21,7 @@ void main() {
     float noise = snoise4(vec4(position * uPositionFrequency, uTime * uTimeFrequency)) * uAmplitude;
     newPosition += normal * noise;
 
-    // Create a empty hole when hovering
+    // Hole effect on hover
     float dist = length(uHoverPosition - vUv);
     float hover = smoothstep(0.0, 0.1, dist);
     float hoverEffect = (1.0 - hover) * uHoverStrength;

@@ -5,20 +5,20 @@ import dynamic from "next/dynamic";
 import { useProgress } from "@react-three/drei";
 import Loader from "@/components/loader";
 
-const Works = dynamic(() => import("@/components/works"));
-const Personal = dynamic(() => import("@/components/personal"));
-const Background = dynamic(() => import("@/components/background"));
-
 const Scene = dynamic(() => import("@/components/scene"), {
 	ssr: false,
 });
+
+const Works = dynamic(() => import("@/components/works"));
+const Personal = dynamic(() => import("@/components/personal"));
+const Background = dynamic(() => import("@/components/background"));
 
 export default function HomePage() {
 	const { progress } = useProgress();
 	const loaded = progress === 100;
 
 	return (
-		<div>
+		<main aria-hidden={true}>
 			<Loader loaded={loaded} />
 			<Background />
 			<div className="h-[90vh] sm:h-[95vh] w-full overflow-hidden relative">
@@ -30,6 +30,7 @@ export default function HomePage() {
 							initial={{ opacity: 0 }}
 							animate={{
 								opacity: loaded ? 1 : 0,
+								y: loaded ? 0 : 20,
 							}}
 							transition={{ delay: 0.2, duration: 0.5 }}
 						>
@@ -38,7 +39,10 @@ export default function HomePage() {
 					</div>
 					<motion.p
 						initial={{ opacity: 0 }}
-						animate={{ opacity: loaded ? 1 : 0 }}
+						animate={{
+							opacity: loaded ? 1 : 0,
+							y: loaded ? 0 : 20,
+						}}
 						transition={{ delay: 0.5 }}
 						className="text-xl md:text-3xl xl:text-4xl text-muted-foreground"
 					>
@@ -58,6 +62,6 @@ export default function HomePage() {
 
 				<Personal />
 			</div>
-		</div>
+		</main>
 	);
 }
