@@ -148,7 +148,7 @@ export default function Wobble() {
 		<mesh
 			ref={mesh}
 			rotation={[0, 0, 0.4]}
-			position={[-1.8, -1.8, 0]}
+			position={[-2, -1.8, 0]}
 			material={shaderMaterial}
 			onPointerEnter={onEnter}
 			onPointerMove={onMove}

@@ -28,12 +28,12 @@ export default function Personal() {
 				</a>
 
 				<a
-					href="https://blog.threes.dev"
+					href="https://blog.threes.dev/posts/spring-animation"
 					target="_blank"
 					rel="noreferrer"
 					className="border rounded-lg bg-night p-3 px-4 text-base flex items-center justify-between hover:border-zinc-500 transition-colors cursor-pointer"
 				>
-					<p>Spring animation in Three.js</p>
+					<p>Spring animation</p>
 					<p className="text-muted-foreground">2025</p>
 				</a>
 			</div>
